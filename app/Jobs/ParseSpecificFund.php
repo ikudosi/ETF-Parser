@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Interfaces\IParser;
+use App\Contracts\IParser;
 use App\Models\Fund;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -45,11 +45,18 @@ class ParseSpecificFund implements ShouldQueue
         $dom = new Dom;
         $dom->loadFromUrl($this->target_url);
 
+        // Get description
+        try {
+            $this->repository->parseDescription($dom, $this->fund);
+        }  catch (Exception $exception) {
+            Log::error($exception);
+        }
+
         // Top 10 Holdings
         try {
             $this->repository->parseTop10Holdings($dom, $this->fund);
         } catch (Exception $exception) {
-
+            Log::error($exception);
         }
 
         // Sector Breakdown

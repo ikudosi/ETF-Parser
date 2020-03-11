@@ -2,14 +2,19 @@
 
 namespace App\Services;
 
-use App\Interfaces\IParser;
+use App\Contracts\IParser;
 use App\Jobs\ParseSpecificFund;
 use App\Models\Fund;
 
+/**
+ * Class ETFParser
+ * @package App\Services
+ */
 class ETFParser
 {
-    private $repository;
-
+    /**
+     * @param  IParser  $repository
+     */
     public function handle(IParser $repository)
     {
         // First let's get all necessary data

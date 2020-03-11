@@ -2,12 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\IParser;
+use App\Contracts\IParser;
 use App\Models\Fund;
 use App\Models\Holdings;
 use GuzzleHttp\Client;
 use PHPHtmlParser\Dom;
 
+/**
+ * Class SSGA
+ * @package App\Repositories
+ */
 class SSGA implements IParser
 {
     public function baseUrl()
@@ -45,6 +49,24 @@ class SSGA implements IParser
         }
 
         return $targetFunds;
+    }
+
+    /**
+     * @param  Dom  $dom
+     * @param  Fund  $fund
+     * @throws \PHPHtmlParser\Exceptions\ChildNotFoundException
+     * @throws \PHPHtmlParser\Exceptions\NotLoadedException
+     */
+    public function parseDescription(Dom $dom, Fund $fund)
+    {
+        $descrition = $dom->find('#overview .fundcontent')[2]->find('.content p')[0];
+
+        if (!$descrition) {
+            return;
+        }
+
+        $fund->description = filter_var($descrition->innerHtml(), FILTER_SANITIZE_STRING);
+        $fund->save();
     }
 
     /**
