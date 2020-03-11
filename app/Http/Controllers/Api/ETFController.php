@@ -32,7 +32,7 @@ class ETFController extends Controller
      */
     public function show($symbol, Request $request)
     {
-        $data = Fund::bySymbol($symbol);
+        $data = Fund::bySymbol($symbol)->with(['holdings','indexSectors','geographyBreakdown']);
 
         $data = $this->filterDataLayer($data, $request);
 
