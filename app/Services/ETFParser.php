@@ -17,7 +17,7 @@ class ETFParser
 
         // Iterate and dispatch
         foreach ($data as $fund) {
-            $fundModel = Fund::firstOrCreate(['name' => $fund['name']]);
+            $fundModel = Fund::firstOrCreate(['name' => $fund['name'], 'url' => $fund['target_url']]);
 
             dispatch(new ParseSpecificFund($repository, $fundModel, $fund['target_url']));
         }

@@ -47,17 +47,75 @@ class SSGA implements IParser
         return $targetFunds;
     }
 
+    /**
+     * @param  Dom  $dom
+     * @param  Fund  $fund
+     * @throws \PHPHtmlParser\Exceptions\ChildNotFoundException
+     * @throws \PHPHtmlParser\Exceptions\NotLoadedException
+     */
     public function parseTop10Holdings(Dom $dom, Fund $fund)
     {
         $fund->holdings()->delete();
 
-        $dom->find('.fund-top-holdings > table > tbody > tr')->each(function ($tableRow) use ($fund) {
-            $cells = $tableRow->find('td');
+        $dom->find('.fund-top-holdings table > tbody > tr')->each(function ($tableRow) use ($fund) {
+            $label = $tableRow->find('td.label')[0]->innerHtml();
+            $weight = str_replace('%','',$tableRow->find('td.weight')[0]->innerHtml());
+            $data = str_replace(',','',$tableRow->find('td[data-label="Shares Held:"]')[0]->innerHtml());
 
             $fund->holdings()->create([
-                'name' => $cells[0]->innerHtml(),
-                'shares_held' => str_replace(',','',$cells[1]->innerHtml()),
-                'weight' => str_replace('%','',$cells[2]->innerHtml())
+                'name' => $label,
+                'shares_held' => $data,
+                'weight' => $weight
+            ]);
+        });
+    }
+
+    /**
+     * @param  Dom  $dom
+     * @param  Fund  $fund
+     * @throws \PHPHtmlParser\Exceptions\ChildNotFoundException
+     * @throws \PHPHtmlParser\Exceptions\NotLoadedException
+     */
+    public function parseSectors(Dom $dom, Fund $fund)
+    {
+        $fund->indexSectors()->delete();
+
+        $dom->find('.index-sector-breakdown table > tbody > tr')->each(function ($tableRow) use ($fund) {
+            $label = $tableRow->find('td.label')[0]->innerHtml();
+            $data = str_replace('%','',$tableRow->find('td.data')[0]->innerHtml());
+
+            $fund->indexSectors()->create([
+                'name' => $label,
+                'weight' => $data
+            ]);
+        });
+    }
+
+    /**
+     * @param  Dom  $dom
+     * @param  Fund  $fund
+     * @throws \PHPHtmlParser\Exceptions\ChildNotFoundException
+     * @throws \PHPHtmlParser\Exceptions\NotLoadedException
+     */
+    public function parseGeographyBreakdown(Dom $dom, Fund $fund)
+    {
+        $fund->geographyBreakdown()->delete();
+
+        $input = $dom->find('#fund-geographical-breakdown')[0];
+
+        if (!$input) {
+            return;
+        }
+
+        $data = json_decode(str_replace('&#34;', '"', $input->getAttribute('value')), true);
+
+        collect($data['attrArray'])->each(function ($tableRow) use ($fund) {
+            $label = $tableRow['name']['value'];
+            $data =  str_replace('%','',$tableRow['weight']['value']);
+
+            $fund->geographyBreakdown()->create([
+                'country_name' => $label,
+                'weight' => $data
             ]);
         });
     }

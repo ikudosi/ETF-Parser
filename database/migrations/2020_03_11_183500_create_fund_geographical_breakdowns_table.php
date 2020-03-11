@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHoldingsTable extends Migration
+class CreateFundGeographicalBreakdownsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,10 @@ class CreateHoldingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('funds', function (Blueprint $table) {
-            $table->integerIncrements('id');
-            $table->string('name');
-            $table->string('url');
-            $table->timestamps();
-        });
-
-        Schema::create('holdings', function (Blueprint $table) {
+        Schema::create('fund_geographical_breakdowns', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->integer('fund_id')->unsigned();
-            $table->string('name');
-            $table->integer('shares_held');
+            $table->string('country_name');
             $table->decimal('weight');
             $table->timestamps();
 
@@ -39,7 +31,6 @@ class CreateHoldingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('holdings');
-        Schema::dropIfExists('funds');
+        Schema::dropIfExists('fund_geographical_breakdowns');
     }
 }

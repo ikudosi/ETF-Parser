@@ -9,6 +9,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
+use Mockery\Exception;
 use PHPHtmlParser\Dom;
 
 class ParseSpecificFund implements ShouldQueue
@@ -44,6 +46,24 @@ class ParseSpecificFund implements ShouldQueue
         $dom->loadFromUrl($this->target_url);
 
         // Top 10 Holdings
-        $this->repository->parseTop10Holdings($dom, $this->fund);
+        try {
+            $this->repository->parseTop10Holdings($dom, $this->fund);
+        } catch (Exception $exception) {
+
+        }
+
+        // Sector Breakdown
+        try {
+            $this->repository->parseSectors($dom, $this->fund);
+        } catch (Exception $exception) {
+            Log::error($exception);
+        }
+
+        // Geography Breakdown
+        try {
+            $this->repository->parseGeographyBreakdown($dom, $this->fund);
+        } catch (Exception $exception) {
+            Log::error($exception);
+        }
     }
 }
