@@ -15,7 +15,7 @@ class CreateHoldingsTable extends Migration
     {
         Schema::create('funds', function (Blueprint $table) {
             $table->integerIncrements('id');
-            $table->string('name');
+            $table->string('symbol');
             $table->longText('description')->nullable();
             $table->string('url');
             $table->timestamps();

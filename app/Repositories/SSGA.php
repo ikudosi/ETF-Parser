@@ -43,7 +43,7 @@ class SSGA implements IParser
                 continue;
             }
             $targetFunds[] = [
-                'name' => $data['fundTicker'],
+                'symbol' => $data['fundTicker'],
                 'target_url' => "{$this->baseUrl()}/{$data['fundUri']}"
             ];
         }

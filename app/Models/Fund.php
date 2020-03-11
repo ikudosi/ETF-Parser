@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -10,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @package App\Models
  *
  * @property int id
- * @property string name
+ * @property string symbol
  * @property string description
  * @property string url
  *
@@ -18,10 +17,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property HasMany indexSectors
  * @property HasMany geographyBreakdown
  */
-class Fund extends Model
+class Fund extends BaseModel
 {
     protected $fillable = [
-        'name','description','url'
+        'symbol','description','url'
     ];
 
     /**
@@ -29,7 +28,7 @@ class Fund extends Model
      */
     public function holdings()
     {
-        return $this->hasMany(Holdings::class);
+        return $this->hasMany(Holdings::class)->orderByDesc('weight');
     }
 
     /**
@@ -37,7 +36,7 @@ class Fund extends Model
      */
     public function indexSectors()
     {
-        return $this->hasMany(FundIndexSector::class);
+        return $this->hasMany(FundIndexSector::class)->orderByDesc('weight');
     }
 
     /**
@@ -45,6 +44,16 @@ class Fund extends Model
      */
     public function geographyBreakdown()
     {
-        return $this->hasMany(FundGeographicalBreakdown::class);
+        return $this->hasMany(FundGeographicalBreakdown::class)->orderByDesc('weight');
+    }
+
+    /**
+     * @param $query
+     * @param $symbol
+     * @return mixed
+     */
+    public static function scopeBySymbol($query, $symbol)
+    {
+        return $query->where('symbol', $symbol);
     }
 }

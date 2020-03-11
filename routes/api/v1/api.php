@@ -18,5 +18,9 @@ Route::namespace('Api')->group(function () {
     Route::post('login', 'AuthController@login');
     Route::post('signup', 'AuthController@signup');
 
-    Route::get('etfs', 'ETFController@index')->middleware(['auth:api']);
+    Route::prefix('etfs')->middleware('auth:api')->group(function () {
+        Route::get('/', 'ETFController@index');
+        Route::get('symbols', 'ETFController@listAllSymbols');
+        Route::get('symbols/{symbol}', 'ETFController@show');
+    });
 });

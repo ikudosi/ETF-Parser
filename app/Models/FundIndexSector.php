@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * Class FundIndexSector
  * @package App\Models
@@ -13,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string name
  * @property double weight
  */
-class FundIndexSector extends Model
+class FundIndexSector extends BaseModel
 {
     protected $fillable = ['fund_id','name','weight'];
 }
