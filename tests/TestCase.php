@@ -9,4 +9,11 @@ use Illuminate\Foundation\Testing\WithFaker;
 abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication, WithFaker, RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->artisan('passport:install');
+    }
 }

@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::namespace('Api')->group(function () {
-    Route::post('login', 'AuthController@login');
-    Route::post('signup', 'AuthController@signup')->name('auth.signup');
+    Route::post('login', 'AuthController@login')->name('api.auth.login');
+    Route::post('signup', 'AuthController@signup')->name('api.auth.signup');
 
     Route::prefix('etfs')->middleware('auth:api')->group(function () {
         Route::get('/', 'ETFController@index');
