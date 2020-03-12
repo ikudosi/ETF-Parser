@@ -1,0 +1,241 @@
+{
+	"info": {
+		"_postman_id": "b86a37c8-9ce5-4052-8532-7c2b81cd37c6",
+		"name": "ETF",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Tony Starks",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "tonystarks@avengers.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "LoveYou3000",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "LoveYou3000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://etf.local/api/v1/signup",
+					"protocol": "http",
+					"host": [
+						"etf",
+						"local"
+					],
+					"path": [
+						"api",
+						"v1",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Requested-With",
+						"value": "XMLHttpRequest",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "juliusplaras@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Vegeta85",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://etf.local/api/v1/login",
+					"protocol": "http",
+					"host": [
+						"etf",
+						"local"
+					],
+					"path": [
+						"api",
+						"v1",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List All ETFs",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZWYyM2UyMTEwNjczNTJjM2VmOTFkNWIzZDNlNTYxNzY1YjlhN2Q1ZWIyM2YwOTQ3NTA2Y2FmMTVmODUyYzlmMmJlMjI4ZDNmYjc1YmVhMTAiLCJpYXQiOjE1ODQwNDI0NTEsIm5iZiI6MTU4NDA0MjQ1MSwiZXhwIjoxNjE1NTc4NDUxLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.Nz9l6x3d57xvwGdqUsupJkqpT_SZrxRGutVcALO0a87d1GVLYiQLSQNG9vCad2X3w-E6sPIO2sSrEggUb47wu8ptQcwrQkF7sJKnO5Rw3PprB0vNmG-bTajcabtZj9GVj_t5jo3_jjqH7R3u3ePV-cl0ssqKVpN5j31Y1npqwD0KDe3DArBDusvxOWPf5JDFOnvBX05BWBnGWon4l4-AYcHBOa_G4lpIxU_W954_r9YaPA29_evyjS6eEKsEOXw9hrObFdsayumiDT8DCnIMrg2RZ6XYgG0I0P8EHC87VVZzsLJh1HRmmkjpEA_iGkaGTC1513O8vGSTlBAdF8Iyc13qzj-jjRGKex2Q1wHAiSqT4GJRJzAelZ4IFIERZlhilV50BWq-D_2VET8yowImmd1FOKbPQ2OE8MArz5K-QUeS9MhZW-KFh5viJ2F7q-es6lq09IlKLRM31PwEmYqB0Ka-k213xPMCscopEOpKEEdAiF66MAALs31vVx7sni2kgeqM3-72diqoQRNXxlTTatbewy69uhU6DNfQlkloTJO2bi5cZLVRWxiogHxeQHzz478Un1UtHHQmO4UqZyTWChnd2WrGR2V7wB2mfft79LZreIWKAH6NWoSiaJMlM0aMHb7YkxVOTzZynrHYCVIu5CPCcCayEaiA0m4jVtwGdiE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://etf.local/api/v1/etfs/symbols",
+					"protocol": "http",
+					"host": [
+						"etf",
+						"local"
+					],
+					"path": [
+						"api",
+						"v1",
+						"etfs",
+						"symbols"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ETF By Symbol",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZWYyM2UyMTEwNjczNTJjM2VmOTFkNWIzZDNlNTYxNzY1YjlhN2Q1ZWIyM2YwOTQ3NTA2Y2FmMTVmODUyYzlmMmJlMjI4ZDNmYjc1YmVhMTAiLCJpYXQiOjE1ODQwNDI0NTEsIm5iZiI6MTU4NDA0MjQ1MSwiZXhwIjoxNjE1NTc4NDUxLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.Nz9l6x3d57xvwGdqUsupJkqpT_SZrxRGutVcALO0a87d1GVLYiQLSQNG9vCad2X3w-E6sPIO2sSrEggUb47wu8ptQcwrQkF7sJKnO5Rw3PprB0vNmG-bTajcabtZj9GVj_t5jo3_jjqH7R3u3ePV-cl0ssqKVpN5j31Y1npqwD0KDe3DArBDusvxOWPf5JDFOnvBX05BWBnGWon4l4-AYcHBOa_G4lpIxU_W954_r9YaPA29_evyjS6eEKsEOXw9hrObFdsayumiDT8DCnIMrg2RZ6XYgG0I0P8EHC87VVZzsLJh1HRmmkjpEA_iGkaGTC1513O8vGSTlBAdF8Iyc13qzj-jjRGKex2Q1wHAiSqT4GJRJzAelZ4IFIERZlhilV50BWq-D_2VET8yowImmd1FOKbPQ2OE8MArz5K-QUeS9MhZW-KFh5viJ2F7q-es6lq09IlKLRM31PwEmYqB0Ka-k213xPMCscopEOpKEEdAiF66MAALs31vVx7sni2kgeqM3-72diqoQRNXxlTTatbewy69uhU6DNfQlkloTJO2bi5cZLVRWxiogHxeQHzz478Un1UtHHQmO4UqZyTWChnd2WrGR2V7wB2mfft79LZreIWKAH6NWoSiaJMlM0aMHb7YkxVOTzZynrHYCVIu5CPCcCayEaiA0m4jVtwGdiE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "relations",
+						"value": "holdings",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://etf.local/api/v1/etfs/symbols/DIA",
+					"protocol": "http",
+					"host": [
+						"etf",
+						"local"
+					],
+					"path": [
+						"api",
+						"v1",
+						"etfs",
+						"symbols",
+						"DIA"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "accessToken",
+				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZjdkYTE4ZDEwODdiMGQ4ZTAxN2U5OGRiZDU2Zjc3YmYzMzI5NmU0NTFmZGE2MTVjOTY0MzI0OTljNjc5YmViNGMyZmJjYmRhZDQ3M2UzMmMiLCJpYXQiOjE1ODM5NDE3NjQsIm5iZiI6MTU4Mzk0MTc2NCwiZXhwIjoxNjE1NDc3NzY0LCJzdWIiOiIiLCJzY29wZXMiOltdfQ.SDw4GYwrG8tOhvD06THtHtxqnHZQ0u-w7YL-KM_LK3UE6mZugnLKYt9xk_nRF4l08TGCNguUu9bW8EhyCTmgsGreODKRTYvGOF_ViRmyMXskN1fvefaqt6HakEy6he8AbJj7hAmenubvlZRqEsTd5tQ8eQngO5VxDOZtCkn2TgNuiDMtoszOkmtxpFbD4rcvmME_f1g_Nls5x2QW6E2BnoF9KtMbRs8YMsYYHk6wPdTSdAP8DycADISTQcqzPJJWvCOAdsMIADBF4gfPpxzV93ubJet3fXaa-tfH9XEKAdRIgGXxtfPpZBeicjce2cOksbbjYQGMUCHxV69GX42KwvewOrfXYDqGBHWp8HN5d7FPBNOdWIoqQRrISlyTKvHPm2E4Cos1AT0Rt8tzHvqssaGILAnb5NUMvc99XFXxneC5HJvIjETZR9I-yKTXrPjmGxz--EUJk61EeKOLkZym2WZFWtuhjNfHqJTPtsLlnrcSKasTXStKT2c2H--zGKe6tFpUUcv4xW0fMIqz8uIEnKIBt2W-B_eyUPmoeaobT6uGMlkunKoBO4nfzkEX6b98eaw4tuO5C4bLwKmB1WKFXLEt9nE98OZ-htO2lxqj50znozsVwMARdSEsOd9rYbMAA1b7wjH-JAzIOuJ8Li9ODbyjuMoBhGt3rw_1D6cF79I",
+				"type": "string"
+			},
+			{
+				"key": "tokenType",
+				"value": "Bearer",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "6d54b3ee-1ac3-46dd-84d2-4ee6f5c22816",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "5f244902-e6c0-45f7-900c-35b9feff3da8",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
